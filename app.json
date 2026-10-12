@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Opioid Safety",
+    "slug": "opioid-safety",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#FFFFFF"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.opioidsafety.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Opioid Safety uses your location to find nearby pharmacies that may carry naloxone (Narcan).",
+        "UIBackgroundModes": []
+      }
+    },
+    "android": {
+      "package": "com.opioidsafety.app",
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "CALL_PHONE"],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Opioid Safety uses your location to find nearby pharmacies that may carry naloxone (Narcan)."
+        }
+      ]
+    ]
+  }
+}

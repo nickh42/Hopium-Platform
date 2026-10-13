@@ -133,21 +133,26 @@ encoded_query = urllib.parse.quote(query)
 base_map_url = f"https://www.google.com/maps?q={encoded_query}&output=embed"
 
 st.markdown(
-    '<div class="map-note">This page uses a Google Maps embed for nearby Narcan and pharmacy searches. The “Use my location” button requests your browser location and centers the map on nearby pharmacies.</div>',
+    '<div class="map-note">This page uses a Google Maps embed for nearby Narcan and pharmacy searches. The “Use my location” button requests your device location and centers the map on nearby pharmacies.</div>',
     unsafe_allow_html=True,
 )
 
 map_html = f"""
+<div id="location-message" style="display:none; margin-bottom: 0.75rem; padding: 0.75rem 1rem; border-radius: 12px; background: #fff3f3; border: 1px solid #f3c5c5; color: #7a2a2a; font-weight: 600;">
+    Location access was denied. Please enter a city or ZIP code instead.
+</div>
 <div id="map-shell" style="width:100%; min-height:560px;">
     <iframe id="narcan-map-frame" src="{base_map_url}" width="100%" height="560" style="border:0; border-radius: 14px;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 <script>
     const mapFrame = document.getElementById('narcan-map-frame');
     const button = document.getElementById('use-my-location-btn');
+    const messageBox = document.getElementById('location-message');
     if (button) {{
         button.addEventListener('click', function() {{
             if (!navigator.geolocation) {{
-                alert('Location access is not supported in this browser. Please enter a city or ZIP code instead.');
+                messageBox.textContent = 'Location access is not supported in this browser. Please enter a city or ZIP code instead.';
+                messageBox.style.display = 'block';
                 return;
             }}
 
@@ -157,6 +162,7 @@ map_html = f"""
                 const centerMapUrl = 'https://www.google.com/maps?q=pharmacies+near+me&center=' + lat + ',' + lng + '&z=13&output=embed';
                 mapFrame.src = centerMapUrl;
                 mapFrame.scrollIntoView({{ behavior: 'smooth', block: 'nearest' }});
+                messageBox.style.display = 'none';
             }}, function(error) {{
                 let msg = 'Location access was denied. Please enter a city or ZIP code instead.';
                 if (error && error.code === 2) {{
@@ -164,13 +170,14 @@ map_html = f"""
                 }} else if (error && error.code === 3) {{
                     msg = 'Location request timed out. Please enter a city or ZIP code instead.';
                 }}
-                alert(msg);
+                messageBox.textContent = msg;
+                messageBox.style.display = 'block';
             }}, {{ enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }});
         }});
     }}
 </script>
 """
-components.html(map_html, height=620)
+st.markdown(map_html, unsafe_allow_html=True)
 
 st.markdown('<div class="reveal"><h3 style="text-align:center;">Helpful next steps</h3></div>', unsafe_allow_html=True)
 col1, col2 = st.columns(2)

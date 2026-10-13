@@ -7,13 +7,15 @@ st.set_page_config(page_title="Hopium", page_icon="💊", layout="wide")
 st.markdown(
     """
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Manrope:wght@400;500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap');
         html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
             background: linear-gradient(180deg, #dff4ff 0%, #d3ecff 100%);
             color: #123b5d;
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Times New Roman', Times, serif;
         }
-        [data-testid="stSidebarNav"] { display: none; }
+        [data-testid="stSidebar"], [data-testid="stSidebarNav"], section[data-testid="stSidebar"] {
+            display: none !important;
+        }
         .hopium-splash {
             position: fixed;
             inset: 0;
@@ -27,23 +29,26 @@ st.markdown(
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 0.75rem;
             text-align: center;
+            transform: translateY(-0.5rem);
         }
         .hopium-heart {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             display: block;
             filter: drop-shadow(0 14px 18px rgba(235, 117, 175, 0.22));
         }
         .hopium-title {
-            font-family: 'Baloo 2', cursive;
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 5.5rem;
+            font-weight: 700;
             letter-spacing: 0.04em;
             color: #123b5d;
             margin: 0;
             line-height: 1;
+            text-align: center;
         }
         .hopium-plant {
             filter: drop-shadow(0 10px 16px rgba(236, 117, 170, 0.3));

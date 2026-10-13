@@ -5,26 +5,60 @@ st.set_page_config(page_title="Hopium Info", page_icon="💊", layout="wide")
 st.markdown(
     """
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Manrope:wght@400;500;700;800&display=swap');
         html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
             background: linear-gradient(180deg, #f3fbff 0%, #edf7ff 100%);
             color: #123b5d;
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Times New Roman', Times, serif;
         }
-        [data-testid="stSidebarNav"] { display: none; }
-        .top-nav { margin-top: 0.25rem; }
-        .top-nav button {
-            border-radius: 999px;
-            border: 1px solid rgba(34, 91, 151, 0.18);
-            background: rgba(255,255,255,0.72);
-            color: #173d69;
-            font-weight: 700;
-            padding: 0.5rem 1rem;
-            min-width: 90px;
+        [data-testid="stSidebar"], [data-testid="stSidebarNav"], section[data-testid="stSidebar"] {
+            display: none !important;
+        }
+        div.stButton > button {
+            background: transparent !important;
+            border: 1px solid transparent !important;
+            box-shadow: none !important;
+            color: #173d69 !important;
+            font-family: 'Times New Roman', Times, serif !important;
+            font-size: 2.5rem !important;
+            font-weight: 700 !important;
+            line-height: 1.1 !important;
+            min-width: 180px !important;
+            padding: 0.7rem 1.1rem !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+        }
+        div.stButton > button:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border: 1px solid rgba(23, 61, 105, 0.15) !important;
+            border-radius: 999px !important;
+        }
+        .top-page-nav {
+            position: fixed;
+            top: 0.7rem;
+            right: 1.25rem;
+            left: auto;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 0.25rem 0.2rem 0.4rem 0;
+            background: rgba(243, 251, 255, 0.22);
+            backdrop-filter: blur(1px);
+        }
+        .top-page-nav > div {
+            width: max-content !important;
+            margin-left: 0 !important;
+        }
+        .top-page-nav > div > div {
+            display: flex !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+            gap: 1.8rem !important;
         }
         .page-title {
-            font-family: 'Baloo 2', cursive;
-            font-size: 3rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 3.2rem;
             line-height: 1.1;
             margin-bottom: 0.15rem;
             text-align: center;
@@ -32,7 +66,7 @@ st.markdown(
         }
         .subtitle {
             text-align: center;
-            font-size: 1.02rem;
+            font-size: 1.08rem;
             color: #2a527b;
             margin-bottom: 1.2rem;
         }
@@ -72,7 +106,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-nav_left, info_nav, emergency_nav, narcan_nav = st.columns([6, 1, 1, 1.2])
+st.markdown("<div class='top-page-nav'>", unsafe_allow_html=True)
+info_nav, emergency_nav, narcan_nav = st.columns(3)
 with info_nav:
     if st.button("Info", key="info_nav_top"):
         st.switch_page("pages/1_Info.py")
@@ -82,6 +117,7 @@ with emergency_nav:
 with narcan_nav:
     if st.button("Narcan", key="narcan_nav_top"):
         st.switch_page("pages/3_Narcan_Map.py")
+st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown('<div class="reveal"><h1 class="page-title">Hopium: Opioid Safety & Support</h1></div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Practical guidance for understanding opioids, spotting overdose, and getting help fast.</div>', unsafe_allow_html=True)

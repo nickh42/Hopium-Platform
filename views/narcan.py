@@ -1,7 +1,9 @@
 import streamlit as st
 
 from hopium.graphics import ICONS, NARCAN_DEVICE
-from hopium.ui import callout, cards
+from hopium.ui import callout, cards, large_layout
+
+large_layout()
 
 st.title("Narcan Nasal Spray Guide")
 st.caption("Based on the Narcan Nasal Spray instructions for use and CDC and SAMHSA guidance. Not a substitute for medical advice.")

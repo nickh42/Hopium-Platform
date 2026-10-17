@@ -82,3 +82,32 @@ def cards(items, step: bool = False) -> None:
 def callout(html: str) -> None:
     st.markdown(f'<div class="hp-callout">{html}</div>', unsafe_allow_html=True)
 
+
+
+def large_layout() -> None:
+    """Wider page with larger type and cards, used by the long-form guide pages."""
+    st.markdown(
+        """
+<style>
+.block-container { max-width: 1400px !important; padding-left: 4vw !important; padding-right: 4vw !important; }
+.stMarkdown p, .stMarkdown li, .stMarkdown td, .stMarkdown th { font-size: 1.18rem !important; line-height: 1.6; }
+[data-testid="stCaptionContainer"] { font-size: 1.05rem !important; }
+.stMarkdown li { margin-bottom: .3rem; }
+.stMarkdown table { margin: 0 auto; }
+.stMarkdown th, .stMarkdown td { text-align: center !important; }
+h1 { font-size: clamp(2.1rem, 4.2vw, 3.2rem) !important; }
+h2 { font-size: clamp(1.7rem, 3.2vw, 2.35rem) !important; margin-top: 1.5rem; }
+h3 { font-size: clamp(1.35rem, 2.4vw, 1.8rem) !important; }
+.hp-grid { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+.hp-card { padding: 24px 20px; }
+.hp-card svg { width: 112px; height: 112px; }
+.hp-card .t { font-size: 1.27rem; margin: 10px 0 8px; }
+.hp-card p { font-size: 1.08rem; line-height: 1.5; }
+.hp-callout, .hp-callout * { font-size: 1.13rem; }
+.hp-callout { padding: 16px 22px; }
+.hp-step .num { width: 32px; height: 32px; line-height: 32px; font-size: 1.05rem; }
+.hp-device svg { max-width: 760px; }
+</style>
+""",
+        unsafe_allow_html=True,
+    )

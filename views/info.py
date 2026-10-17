@@ -3,6 +3,29 @@ import streamlit as st
 from hopium.graphics import ICONS
 from hopium.ui import callout, cards
 
+st.markdown(
+    """
+<style>
+.block-container { max-width: 1400px !important; padding-left: 4vw !important; padding-right: 4vw !important; }
+.stMarkdown p, .stMarkdown li, .stMarkdown td, .stMarkdown th, [data-testid="stCaptionContainer"] { font-size: 1.25rem !important; line-height: 1.65; }
+[data-testid="stCaptionContainer"] { font-size: 1.1rem !important; }
+.stMarkdown li { margin-bottom: .35rem; }
+h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem) !important; }
+h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem) !important; margin-top: 1.6rem; }
+h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem) !important; }
+.hp-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+.hp-card { padding: 26px 22px; }
+.hp-card svg { width: 120px; height: 120px; }
+.hp-card .t { font-size: 1.35rem; margin: 10px 0 8px; }
+.hp-card p { font-size: 1.15rem; line-height: 1.55; }
+.hp-callout { font-size: 1.2rem; padding: 18px 24px; }
+.hp-callout, .hp-callout * { font-size: 1.2rem; }
+.hp-step .num { width: 34px; height: 34px; line-height: 34px; font-size: 1.1rem; }
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
 st.title("Opioid Information")
 st.caption(
     "General education based on CDC, SAMHSA and FDA guidance and the Narcan (naloxone) "

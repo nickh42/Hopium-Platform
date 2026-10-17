@@ -43,12 +43,6 @@ h2 {{ font-size: clamp(1.4rem, 4vw, 1.9rem) !important; }}
 [data-testid="stAlert"], [data-testid="stTextInput"] input, [data-baseweb="input"], [data-baseweb="base-input"], [data-baseweb="textarea"] {{ border-radius: 0 !important; }}
 [data-testid="stAlert"] {{ border: 2px solid #000; }}
 [data-baseweb="input"], [data-baseweb="base-input"], [data-baseweb="textarea"] {{ border: 2px solid #000 !important; }}
-.hp-scenes {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 8px 0 18px; }}
-.hp-scene {{ background: #fff; border: 2px solid #000; border-radius: 0; padding: 0 0 12px; text-align: center; position: relative; overflow: hidden; }}
-.hp-scene svg {{ width: 100%; height: auto; display: block; border-bottom: 2px solid #000; }}
-.hp-scene .num {{ position: absolute; top: 8px; left: 8px; z-index: 2; background: {PINK_DARK}; color: #fff; width: 28px; height: 28px; line-height: 28px; border-radius: 50%; font-weight: 700; }}
-.hp-scene .t {{ margin: 10px 12px 4px; font-weight: 700; color: {NAVY}; font-size: 1.05rem; }}
-.hp-scene p {{ margin: 0 14px; font-size: .92rem; color: #33495f; }}
 </style>
 """
 
@@ -88,15 +82,3 @@ def cards(items, step: bool = False) -> None:
 def callout(html: str) -> None:
     st.markdown(f'<div class="hp-callout">{html}</div>', unsafe_allow_html=True)
 
-
-def scene_cards(items) -> None:
-    """items: list of (title, text), paired in order with the illustrated scenes in hopium.steps."""
-    from hopium.steps import SCENES
-
-    html = ['<div class="hp-scenes">']
-    for i, ((title, text), scene) in enumerate(zip(items, SCENES), 1):
-        html.append(
-            f'<div class="hp-scene"><span class="num">{i}</span>{scene()}<div class="t">{title}</div><p>{text}</p></div>'
-        )
-    html.append("</div>")
-    st.markdown("".join(html), unsafe_allow_html=True)

@@ -1,7 +1,7 @@
 import streamlit as st
 
 from hopium.graphics import ICONS, NARCAN_DEVICE
-from hopium.ui import callout, cards, scene_cards
+from hopium.ui import callout, cards
 
 st.title("Narcan Nasal Spray Guide")
 st.caption("Based on the Narcan Nasal Spray instructions for use and CDC and SAMHSA guidance. Not a substitute for medical advice.")
@@ -14,15 +14,15 @@ st.write(
 st.markdown(f'<div class="hp-device">{NARCAN_DEVICE}</div>', unsafe_allow_html=True)
 
 st.subheader("Step by step")
-scene_cards([
-    ("Open the package", "Peel back the tab and take out the device. Don't press the plunger yet: each device holds exactly one dose."),
-    ("Hold it correctly", "Thumb on the bottom of the plunger. First and middle fingers on either side of the nozzle."),
-    ("Position the person", "Lay them on their back and tilt the head back. Support the neck with your hand."),
-    ("Insert the nozzle", "Gently put the tip in one nostril until your fingers touch the bottom of the nose."),
-    ("Press firmly", "Push the plunger all the way in to release the dose, then take the device out."),
-    ("Turn them on their side", "Put them in the recovery position and call 911 if you haven't already."),
-    ("Repeat if needed", "If there's no response in 2 to 3 minutes, use a new device in the other nostril. Keep repeating every 2 to 3 minutes."),
-])
+cards([
+    ("", 'Open the package', "Peel back the tab and take out the device. Don't press the plunger yet: each device holds exactly one dose."),
+    ("", 'Hold it correctly', 'Thumb on the bottom of the plunger. First and middle fingers on either side of the nozzle.'),
+    ("", 'Position the person', 'Lay them on their back and tilt the head back. Support the neck with your hand.'),
+    ("", 'Insert the nozzle', 'Gently put the tip in one nostril until your fingers touch the bottom of the nose.'),
+    ("", 'Press firmly', 'Push the plunger all the way in to release the dose, then take the device out.'),
+    ("", 'Turn them on their side', "Put them in the recovery position and call 911 if you haven't already."),
+    ("", 'Repeat if needed', "If there's no response in 2 to 3 minutes, use a new device in the other nostril. Keep repeating every 2 to 3 minutes."),
+], step=True)
 
 st.subheader("What to expect after Narcan")
 st.markdown(

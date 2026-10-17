@@ -27,11 +27,11 @@ PAGE = """
 <style>
   body { margin:0; font-family: system-ui, sans-serif; }
   #bar { display:flex; gap:8px; margin-bottom:8px; }
-  #addr { flex:1; padding:8px; border:1px solid #9ab; border-radius:8px; }
+  #addr { flex:1; padding:8px; border:2px solid #000; border-radius:0; }
   button { padding:8px 14px; border:0; border-radius:8px; background:#1f3b57; color:#fff; cursor:pointer; }
   #map { height:420px; border-radius:12px; }
   #list { margin-top:10px; }
-  .row { background:#fff; border:1px solid #bfe3f7; border-radius:10px; padding:8px 12px; margin-bottom:6px; }
+  .row { background:#fff; border:2px solid #000; border-radius:0; padding:8px 12px; margin-bottom:6px; }
   .row small { color:#456; }
 </style>
 <div id="bar"><input id="addr" placeholder="Enter an address or ZIP (or allow location)"><button id="go">Search</button></div>
@@ -90,3 +90,12 @@ st.caption(
     "is on the shelf, so call ahead to confirm."
 )
 components.html(PAGE.replace("__KEY__", json.dumps(key)), height=760, scrolling=True)
+
+st.header("Tips for getting naloxone")
+st.markdown(
+    "- **Ask the pharmacist.** Narcan is sold over the counter, sometimes behind the counter. Just say \"I'd like naloxone.\"\n"
+    "- **Call ahead** to check it's in stock and what it costs. Some insurance plans cover it.\n"
+    "- **Free options:** many local health departments, harm reduction programs, libraries and community organizations give it away.\n"
+    "- **Other places that may carry it:** hospitals, community health centers, treatment programs and some schools.\n"
+    "- **Get two doses** and keep them together, somewhere others can find them."
+)

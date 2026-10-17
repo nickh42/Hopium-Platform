@@ -137,21 +137,43 @@ ICONS = {
     ),
 }
 
-# Labelled diagram of the Narcan nasal spray device.
-NARCAN_DEVICE = f"""
-<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Narcan nasal spray diagram">
-  <rect x="120" y="70" width="90" height="120" rx="14" fill="{BLUE}" stroke="{NAVY}" stroke-width="3"/>
-  <rect x="142" y="20" width="46" height="54" rx="10" fill="#fff" stroke="{NAVY}" stroke-width="3"/>
-  <rect x="155" y="2" width="20" height="22" rx="7" fill="{PINK}" stroke="{NAVY}" stroke-width="3"/>
-  <rect x="136" y="190" width="58" height="20" rx="6" fill="{PINK}" stroke="{NAVY}" stroke-width="3"/>
-  <text x="165" y="205" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">PLUNGER</text>
-  <path d="M165 112 L165 170" stroke="{NAVY}" stroke-width="2" stroke-dasharray="4 4"/>
-  <line x1="175" y1="12" x2="262" y2="22" stroke="{NAVY}" stroke-width="1.5"/>
-  <text x="266" y="26" font-size="13" fill="{NAVY}">Nozzle: into one nostril</text>
-  <line x1="210" y1="100" x2="262" y2="94" stroke="{NAVY}" stroke-width="1.5"/>
-  <text x="266" y="98" font-size="13" fill="{NAVY}">Two fingers either side of</text>
-  <text x="266" y="114" font-size="13" fill="{NAVY}">the nozzle</text>
-  <line x1="194" y1="200" x2="262" y2="200" stroke="{NAVY}" stroke-width="1.5"/>
-  <text x="266" y="204" font-size="13" fill="{NAVY}">Thumb presses plunger</text>
+# Realistic, labelled illustration of a 4 mg naloxone nasal spray device (shaded, with label art).
+NARCAN_DEVICE = """
+<svg viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Narcan nasal spray device diagram">
+  <defs>
+    <linearGradient id="nb" x1="0" x2="1"><stop offset="0" stop-color="#cfd8df"/><stop offset=".35" stop-color="#ffffff"/><stop offset=".7" stop-color="#f1f5f8"/><stop offset="1" stop-color="#b9c5ce"/></linearGradient>
+    <linearGradient id="nz" x1="0" x2="1"><stop offset="0" stop-color="#c3ced6"/><stop offset=".4" stop-color="#fbfdff"/><stop offset="1" stop-color="#aebbc5"/></linearGradient>
+    <linearGradient id="nl" x1="0" x2="1"><stop offset="0" stop-color="#075e86"/><stop offset=".45" stop-color="#1494c9"/><stop offset="1" stop-color="#075e86"/></linearGradient>
+    <linearGradient id="np" x1="0" x2="1"><stop offset="0" stop-color="#b7c3cc"/><stop offset=".4" stop-color="#eef3f6"/><stop offset="1" stop-color="#a3b1bc"/></linearGradient>
+    <radialGradient id="sh"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+  </defs>
+  <ellipse cx="170" cy="312" rx="86" ry="10" fill="url(#sh)"/>
+  <!-- nozzle -->
+  <path d="M154 96 V44 Q154 14 170 14 Q186 14 186 44 V96Z" fill="url(#nz)" stroke="#8fa0ac" stroke-width="2"/>
+  <ellipse cx="170" cy="22" rx="4" ry="3" fill="#6f808c"/>
+  <!-- body -->
+  <path d="M132 96 H208 Q222 96 222 112 V262 Q222 276 208 276 H132 Q118 276 118 262 V112 Q118 96 132 96Z" fill="url(#nb)" stroke="#8fa0ac" stroke-width="2"/>
+  <!-- finger flanges -->
+  <rect x="96" y="112" width="148" height="16" rx="8" fill="url(#nb)" stroke="#8fa0ac" stroke-width="2"/>
+  <!-- label -->
+  <rect x="130" y="148" width="80" height="104" rx="6" fill="url(#nl)"/>
+  <text x="170" y="178" font-size="14" font-weight="800" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" letter-spacing="1">NARCAN</text>
+  <text x="170" y="196" font-size="9" text-anchor="middle" fill="#dff3fb" font-family="Arial, sans-serif">NASAL SPRAY</text>
+  <text x="170" y="236" font-size="22" font-weight="800" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif">4 mg</text>
+  <path d="M138 156 H202" stroke="#fff" stroke-opacity=".5"/>
+  <!-- plunger -->
+  <path d="M146 276 V298 Q146 306 154 306 H186 Q194 306 194 298 V276Z" fill="url(#np)" stroke="#8fa0ac" stroke-width="2"/>
+  <path d="M154 286 H186 M154 292 H186" stroke="#8fa0ac" stroke-width="1.5"/>
+  <!-- callouts -->
+  <g font-family="Arial, sans-serif" font-size="14" fill="#1f3b57">
+    <line x1="186" y1="30" x2="300" y2="30" stroke="#1f3b57"/><circle cx="186" cy="30" r="3" fill="#1f3b57"/>
+    <text x="308" y="26" font-weight="700">Nozzle</text><text x="308" y="44">Goes in one nostril</text>
+    <line x1="244" y1="120" x2="300" y2="120" stroke="#1f3b57"/><circle cx="244" cy="120" r="3" fill="#1f3b57"/>
+    <text x="308" y="116" font-weight="700">Finger flanges</text><text x="308" y="134">First and middle finger here</text>
+    <line x1="210" y1="200" x2="300" y2="200" stroke="#1f3b57"/><circle cx="210" cy="200" r="3" fill="#1f3b57"/>
+    <text x="308" y="196" font-weight="700">One dose per device</text><text x="308" y="214">Do not test or prime</text>
+    <line x1="194" y1="296" x2="300" y2="296" stroke="#1f3b57"/><circle cx="194" cy="296" r="3" fill="#1f3b57"/>
+    <text x="308" y="292" font-weight="700">Plunger</text><text x="308" y="310">Thumb pushes firmly to the end</text>
+  </g>
 </svg>
 """

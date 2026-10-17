@@ -6,19 +6,48 @@ PINK_LIGHT = "#ffd1e3"
 BLUE = "#bfe3f7"
 NAVY = "#1f3b57"
 
-LOGO = f"""
-<svg viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hopium logo">
-  <path d="M100 160 C98 185 104 205 100 225" stroke="#3f9b6a" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <path d="M100 168 C78 150 62 156 56 138 C80 138 96 148 100 168Z" fill="#4fb07c"/>
-  <path d="M100 168 C122 150 138 156 144 138 C120 138 104 148 100 168Z" fill="#4fb07c"/>
-  <path d="M100 18 C152 18 172 70 166 112 C160 152 130 168 100 168 C70 168 40 152 34 112 C28 70 48 18 100 18Z"
-        fill="{PINK}" stroke="{PINK_DARK}" stroke-width="4"/>
-  <path d="M100 18 C84 56 84 120 100 168" stroke="{PINK_DARK}" stroke-width="2.5" fill="none" opacity=".45"/>
-  <path d="M100 18 C116 56 116 120 100 168" stroke="{PINK_DARK}" stroke-width="2.5" fill="none" opacity=".45"/>
-  <path d="M100 132 C66 108 72 76 90 76 C96 76 100 81 100 87 C100 81 104 76 110 76 C128 76 134 108 100 132Z"
-        fill="{PINK_LIGHT}" stroke="{PINK_DARK}" stroke-width="3"/>
+def _heart_logo() -> str:
+    """Poppy bud drawn as a heart: a ruffled petal frill follows the heart outline, with folds converging at the tip."""
+    import math
+
+    cx, cy, k = 100.0, 92.0, 5.0
+
+    def pt(t, scale=1.0, wave=0.0, n=0):
+        x = 16 * math.sin(t) ** 3
+        y = 13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)
+        f = scale * (1 + wave * math.sin(n * t))
+        return cx + k * x * f, cy - k * y * f
+
+    def path(scale, wave=0.0, n=0, steps=360, close=True):
+        pts = [pt(2 * math.pi * i / steps, scale, wave, n) for i in range(steps)]
+        d = "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts)
+        return d + ("Z" if close else "")
+
+    frill_outer = path(1.13, 0.035, 28)
+    frill_mid = path(1.07, 0.03, 20)
+    heart = path(1.0)
+    folds = "".join(
+        f'<path d="{path(sc)}" fill="none" stroke="{PINK_DARK}" stroke-width="2" opacity="{op}"/>'
+        for sc, op in ((0.8, 0.55), (0.6, 0.4), (0.4, 0.3))
+    )
+    bottom = pt(math.pi, 1.0)
+    top = pt(0.0, 1.0)
+    return f"""
+<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hopium logo">
+  <path d="M{bottom[0]:.0f} {bottom[1]+4:.0f} C96 205 106 220 100 236" stroke="#3f9b6a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="{frill_outer}" fill="#e0508f" stroke="{PINK_DARK}" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="{frill_mid}" fill="#ee6aa5" stroke="{PINK_DARK}" stroke-width="2" stroke-linejoin="round"/>
+  <path d="{heart}" fill="{PINK}" stroke="{PINK_DARK}" stroke-width="2.5" stroke-linejoin="round"/>
+  {folds}
+  <path d="M{top[0]:.0f} {top[1]:.0f} Q{top[0]+4:.0f} {(top[1]+bottom[1])/2:.0f} {bottom[0]:.0f} {bottom[1]:.0f}" stroke="{PINK_DARK}" stroke-width="2" fill="none" opacity=".5"/>
+  <path d="M52 62 Q60 48 76 50" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".55"/>
+  <path d="M100 {bottom[1]+4:.0f} C78 {bottom[1]+4:.0f} 70 {bottom[1]+22:.0f} 64 {bottom[1]+20:.0f} C66 {bottom[1]+4:.0f} 84 {bottom[1]-2:.0f} 100 {bottom[1]+4:.0f}Z" fill="#4fb07c"/>
+  <path d="M100 {bottom[1]+4:.0f} C122 {bottom[1]+4:.0f} 130 {bottom[1]+22:.0f} 136 {bottom[1]+20:.0f} C134 {bottom[1]+4:.0f} 116 {bottom[1]-2:.0f} 100 {bottom[1]+4:.0f}Z" fill="#4fb07c"/>
 </svg>
 """
+
+
+LOGO = _heart_logo()
 
 
 def _svg(inner: str, view: str = "0 0 120 120") -> str:

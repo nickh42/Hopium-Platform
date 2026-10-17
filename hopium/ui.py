@@ -32,11 +32,11 @@ h2 {{ font-size: clamp(1.4rem, 4vw, 1.9rem) !important; }}
 .hp-callout {{ background: #fff0f6; border: 2px solid #000; border-left: 6px solid #000; border-radius: 0; padding: 12px 16px; margin: 10px 0; color: {NAVY}; }}
 .hp-device svg {{ width: 100%; max-width: 560px; display: block; margin: 0 auto; }}
 .hp-header {{ display: flex; align-items: center; justify-content: center; gap: 14px; }}
-.hp-header svg {{ width: 56px; height: 64px; }}
+.hp-header svg {{ width: 60px; height: 72px; }}
 .hp-header span {{ font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 800; color: {NAVY}; }}
 #hp-splash {{ position: fixed; inset: 0; z-index: 999999; background: {BLUE}; display: flex; flex-direction: column;
   align-items: center; justify-content: center; animation: hp-fade 0.6s ease 2.3s forwards; }}
-#hp-splash svg {{ width: 150px; height: 172px; animation: hp-pulse 1.4s ease-in-out infinite; }}
+#hp-splash svg {{ width: 160px; height: 192px; animation: hp-pulse 1.4s ease-in-out infinite; }}
 #hp-splash .name {{ font-size: 3.2rem; font-weight: 800; width: 100%; text-align: center; margin: 18px 0 0; color: {NAVY}; letter-spacing: .04em; }}
 @keyframes hp-pulse {{ 0%,100% {{ transform: scale(1); }} 50% {{ transform: scale(1.07); }} }}
 @keyframes hp-fade {{ to {{ opacity: 0; visibility: hidden; }} }}

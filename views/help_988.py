@@ -32,7 +32,10 @@ def confirm() -> None:
 
 
 st.title("Need help now?")
-st.write("Press the button to reach the 988 Suicide & Crisis Lifeline. Free, confidential, 24/7.")
+st.markdown(
+    '<p style="text-align:center">Press the button to reach the 988 Suicide &amp; Crisis Lifeline. Free, confidential, 24/7.</p>',
+    unsafe_allow_html=True,
+)
 
 if st.button("!", key="sos"):
     confirm()

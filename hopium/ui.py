@@ -9,12 +9,15 @@ CSS = f"""
 <style>
 .stApp {{ background: #f4fbff; }}
 h1, h2, h3, h4 {{ color: {NAVY}; overflow-wrap: break-word; word-break: normal; hyphens: auto; line-height: 1.2; }}
+h1, h2, h3, h4, [data-testid="stHeading"], [data-testid="stHeadingWithActionElements"] {{ text-align: center !important; justify-content: center !important; }}
 h1 {{ font-size: clamp(1.7rem, 5vw, 2.5rem) !important; }}
 h2 {{ font-size: clamp(1.4rem, 4vw, 1.9rem) !important; }}
 [data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"], [data-testid="stExpandSidebarButton"] {{ display: none !important; }}
 [data-testid="stHeader"] {{ background: #f4fbff; border-bottom: 2px solid #000; }}
 [data-testid="stHeader"] nav, [data-testid="stTopNavLinkContainer"] {{ margin-left: auto; justify-content: flex-end; }}
-[data-testid="stNavSectionHeader"], [data-testid="stTopNavLinkContainer"] a {{ white-space: nowrap; }}
+[data-testid="stTopNav"] a, [data-testid="stTopNav"] button {{ font-size: 1.15rem !important; padding: 10px 18px !important; white-space: nowrap; }}
+[data-testid="stTopNav"] a p, [data-testid="stTopNav"] button p, [data-testid="stTopNav"] span {{ font-size: 1.15rem !important; font-weight: 600; }}
+[data-testid="stHeader"] {{ min-height: 4rem; }}
 .hp-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 8px 0 18px; }}
 .hp-card {{ background: #fff; border: 2px solid #000; border-radius: 0; padding: 14px; text-align: center; min-width: 0; overflow: hidden; }}
 .hp-card * {{ overflow-wrap: break-word; }}
@@ -28,13 +31,13 @@ h2 {{ font-size: clamp(1.4rem, 4vw, 1.9rem) !important; }}
   line-height: 26px; border-radius: 50%; font-weight: 700; margin-bottom: 4px; }}
 .hp-callout {{ background: #fff0f6; border: 2px solid #000; border-left: 6px solid #000; border-radius: 0; padding: 12px 16px; margin: 10px 0; color: {NAVY}; }}
 .hp-device svg {{ width: 100%; max-width: 560px; display: block; margin: 0 auto; }}
-.hp-header {{ display: flex; align-items: center; gap: 14px; }}
+.hp-header {{ display: flex; align-items: center; justify-content: center; gap: 14px; }}
 .hp-header svg {{ width: 56px; height: 64px; }}
 .hp-header span {{ font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 800; color: {NAVY}; }}
 #hp-splash {{ position: fixed; inset: 0; z-index: 999999; background: {BLUE}; display: flex; flex-direction: column;
   align-items: center; justify-content: center; animation: hp-fade 0.6s ease 2.3s forwards; }}
 #hp-splash svg {{ width: 150px; height: 172px; animation: hp-pulse 1.4s ease-in-out infinite; }}
-#hp-splash h1 {{ font-size: 3.2rem; margin: 18px 0 0; color: {NAVY}; letter-spacing: .04em; }}
+#hp-splash .name {{ font-size: 3.2rem; font-weight: 800; width: 100%; text-align: center; margin: 18px 0 0; color: {NAVY}; letter-spacing: .04em; }}
 @keyframes hp-pulse {{ 0%,100% {{ transform: scale(1); }} 50% {{ transform: scale(1.07); }} }}
 @keyframes hp-fade {{ to {{ opacity: 0; visibility: hidden; }} }}
 [data-testid="stAlert"], [data-testid="stTextInput"] input, [data-baseweb="input"], [data-baseweb="base-input"], [data-baseweb="textarea"] {{ border-radius: 0 !important; }}
@@ -54,7 +57,7 @@ def splash_once() -> None:
         return
     holder = st.empty()
     holder.markdown(
-        f'<div id="hp-splash">{LOGO}<h1>Hopium</h1></div>', unsafe_allow_html=True
+        f'<div id="hp-splash">{LOGO}<div class="name">Hopium</div></div>', unsafe_allow_html=True
     )
     time.sleep(2.8)
     holder.empty()

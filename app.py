@@ -9,6 +9,7 @@ header()
 
 pages = [
     st.Page("views/info.py", title="Info", icon="📘", default=True),
+    st.Page("views/narcan.py", title="Narcan Guide", icon="💊"),
     st.Page("views/help_988.py", title="988 Help", icon="🆘"),
     st.Page("views/map.py", title="Find Narcan", icon="📍"),
 ]

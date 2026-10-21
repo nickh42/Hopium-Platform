@@ -18,8 +18,8 @@ key = api_key()
 if not key:
     st.info(
         "The map needs a Google Maps API key. Add `GOOGLE_MAPS_API_KEY` to `.streamlit/secrets.toml` "
-        "(see `.streamlit/secrets.toml.example`) or set it as an environment variable, then restart the app. "
-        "Enable **Maps JavaScript API** and **Places API (New)** and restrict the key to your site's URL."
+        "or set it as an environment variable, then restart app. "
+        "Enable **Maps JavaScript API** and **Places API (New)** and restrict the key to site's URL."
     )
     st.stop()
 

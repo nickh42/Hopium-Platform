@@ -27,12 +27,12 @@ if not key:
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def search(address: str, radius_km: int):
+def search(address: str, radius_mi: int):
     found = geocode(address, key)
     if not found:
         return None
     lat, lng, label = found
-    return lat, lng, label, nearby_pharmacies(lat, lng, key, radius_km * 1000)
+    return lat, lng, label, nearby_pharmacies(lat, lng, key, int(radius_mi * 1609.34))
 
 
 callout(
@@ -42,7 +42,7 @@ callout(
 
 with st.form("find"):
     address = st.text_input("Your address, city, or ZIP code", placeholder="e.g. 02139 or 100 Main St, Springfield")
-    radius_km = st.select_slider("Search distance", options=[2, 5, 8, 15, 25], value=8, format_func=lambda k: f"{k} km")
+    radius_mi = st.select_slider("Search distance", options=[1, 3, 5, 10, 15], value=5, format_func=lambda m: f"{m} mi")
     go = st.form_submit_button("Search")
 
 if go and not address.strip():
@@ -50,7 +50,7 @@ if go and not address.strip():
 elif go:
     try:
         with st.spinner("Looking for pharmacies..."):
-            result = search(address.strip(), radius_km)
+            result = search(address.strip(), radius_mi)
     except PlacesError as e:
         st.error(str(e))
         st.stop()
@@ -63,7 +63,7 @@ elif go:
             st.info("No pharmacies found in that area. Try a wider search distance.")
         else:
             data = [{"lat": lat, "lon": lng, "name": "You are here", "color": [79, 195, 247]}] + [
-                {"lat": p["lat"], "lon": p["lon"], "name": p["name"], "color": [194, 65, 127]} for p in places
+                {"lat": p["lat"], "lon": p["lon"], "name": f"{p['name']} ({p['miles']:.1f} mi)", "color": [194, 65, 127]} for p in places
             ]
             st.pydeck_chart(
                 pdk.Deck(
@@ -77,7 +77,7 @@ elif go:
             for p in places:
                 phone = f" · {p['phone']}" if p["phone"] else ""
                 st.markdown(
-                    f"**{p['name']}**  \n{p['address']}{phone}  \n"
+                    f"**{p['name']}** · {p['miles']:.1f} mi away  \n{p['address']}{phone}  \n"
                     f"[Get directions]({directions_url(lat, lng, p)}) · "
                     f"[Apple Maps]({apple_directions_url(lat, lng, p)}) · "
                     f"[View on Google Maps]({p['url']})"

@@ -1,4 +1,5 @@
 """Server-side Google Geocoding and Places (New) calls. The API key never reaches the browser."""
+import math
 from typing import Optional
 
 import requests
@@ -64,7 +65,10 @@ def nearby_pharmacies(lat: float, lng: float, key: str, radius_m: int = 8000) ->
             "url": "https://www.google.com/maps/search/?api=1&query=" + requests.utils.quote(f"{name} {p.get('formattedAddress', '')}")
                    + (f"&query_place_id={p['id']}" if p.get("id") else ""),
         })
-    return [p for p in out if p["lat"] is not None and p["lon"] is not None]
+    out = [p for p in out if p["lat"] is not None and p["lon"] is not None]
+    for p in out:
+        p["miles"] = distance_miles(lat, lng, p["lat"], p["lon"])
+    return sorted(out, key=lambda p: p["miles"])
 
 
 def directions_url(origin_lat: float, origin_lng: float, place: dict) -> str:
@@ -78,3 +82,10 @@ def directions_url(origin_lat: float, origin_lng: float, place: dict) -> str:
 def apple_directions_url(origin_lat: float, origin_lng: float, place: dict) -> str:
     return (f"https://maps.apple.com/?saddr={origin_lat},{origin_lng}"
             f"&daddr={requests.utils.quote(place['name'] + ' ' + place['address'])}&dirflg=d")
+
+
+def distance_miles(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    """Straight-line (great-circle) distance in miles."""
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    a = math.sin((p2 - p1) / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(math.radians(lng2 - lng1) / 2) ** 2
+    return 3958.8 * 2 * math.asin(math.sqrt(a))

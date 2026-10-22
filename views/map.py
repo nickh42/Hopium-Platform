@@ -3,7 +3,7 @@ import os
 import pydeck as pdk
 import streamlit as st
 
-from hopium.places import PlacesError, geocode, nearby_pharmacies
+from hopium.places import PlacesError, apple_directions_url, directions_url, geocode, nearby_pharmacies
 from hopium.ui import callout
 
 st.title("Find Narcan near you")
@@ -76,7 +76,12 @@ elif go:
             )
             for p in places:
                 phone = f" · {p['phone']}" if p["phone"] else ""
-                st.markdown(f"**{p['name']}**  \n{p['address']}{phone}  \n[Open in Google Maps]({p['url']})")
+                st.markdown(
+                    f"**{p['name']}**  \n{p['address']}{phone}  \n"
+                    f"[Get directions]({directions_url(lat, lng, p)}) · "
+                    f"[Apple Maps]({apple_directions_url(lat, lng, p)}) · "
+                    f"[View on Google Maps]({p['url']})"
+                )
 
 st.header("Tips for getting naloxone")
 st.markdown(

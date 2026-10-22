@@ -62,12 +62,12 @@ elif go:
         if not places:
             st.info("No pharmacies found in that area. Try a wider search distance.")
         else:
-            data = [{"lat": lat, "lon": lng, "name": "You are here", "color": [31, 59, 87]}] + [
+            data = [{"lat": lat, "lon": lng, "name": "You are here", "color": [79, 195, 247]}] + [
                 {"lat": p["lat"], "lon": p["lon"], "name": p["name"], "color": [194, 65, 127]} for p in places
             ]
             st.pydeck_chart(
                 pdk.Deck(
-                    layers=[pdk.Layer("ScatterplotLayer", data, get_position="[lon, lat]", get_fill_color="color",
+                    layers=[pdk.Layer("ScatterplotLayer", data, get_position="[lon, lat]", get_fill_color="color", stroked=True, get_line_color=[31, 59, 87], get_line_width=2, line_width_min_pixels=2,
                                       get_radius=90, radius_min_pixels=7, pickable=True)],
                     initial_view_state=pdk.ViewState(latitude=lat, longitude=lng, zoom=11.5),
                     tooltip={"text": "{name}"},
